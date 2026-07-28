@@ -301,10 +301,16 @@ Submit `starter_v0/` with:
 Do not submit `.env`, API keys, `.venv/`, hoặc cache/build output.
 Kênh nộp, quy tắc đặt tên và deadline cuối theo thông báo của giảng viên; team cần xác nhận các thông tin này trước khi zip hoặc gửi repo link.
 
-## Checkpoints
+## Checkpoints — K4 buổi chiều (14:00–18:00)
 
-- 15:00 — Run baseline + build UI.
-- 15:30 — Improve prompt/tools for v1 + build at least 1 tool.
-- 16:00 — Write team eval cases + improve v2.
-- 16:30 — Team showdown.
-- 17:30 — Improve v3 + hoàn thiện report Phần B.
+0. **Kickoff — 14:00–14:15:** chia nhóm, phân vai và mở `starter_v0/`.
+1. **Setup — 14:15–14:40:** chuẩn bị môi trường, API keys và chạy provider preflight.
+2. **Baseline v0 — 14:40–15:15:** chạy base eval, đọc một failed trace, dựng UI local và ghi bốn metric.
+3. **v1 + Tool — 15:15–15:50:** sửa một giả thuyết, hoàn thiện một tool mới, chạy v1 và cập nhật version log.
+4. **Nghỉ — 15:50–16:05.**
+5. **Eval + v2 — 16:05–16:30:** hoàn thành 10 team eval cases, evidence v2, ba kịch bản demo, Report A và rehearsal.
+6. **Demo → Ship — 16:30–17:40:**
+   - **Showdown — 16:30–17:15:** giới thiệu, live test và challenge.
+   - **v3 + Report B — 17:15–17:35:** áp dụng feedback, chạy v3 và hoàn thiện report bằng evidence.
+   - **Final gate — 17:35–17:40:** kiểm tra và chuẩn bị nộp `starter_v0/`.
+7. **Kahoot Recap — 17:40–18:00.**
