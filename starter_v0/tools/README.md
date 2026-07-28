@@ -29,6 +29,6 @@ requires_confirmation: true   # only for write/action tools
 ---
 ```
 
-Core tools are enough to pass the base lab. Bonus tools are for teams that want
-extra scope, extra eval cases, or a live delivery action.
-
+Core tools are enough to pass the base lab. `track: bonus` means optional or
+extension-only; it does not automatically earn bonus points. If its declaration
+stays in `tools.yaml`, the model can still see it and core routing may change.
