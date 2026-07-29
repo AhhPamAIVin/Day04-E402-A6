@@ -1,7 +1,7 @@
 {
-  "dataset_id": "day04_v2_research_group",
+  "dataset_id": "technova_company_policy_group_v1",
   "dataset_role": "group",
-  "description": "Template để NHÓM tự viết đúng 10 case: 5 single-turn dùng query và 5 multi-turn dùng turns. Mỗi case cần: id, phase='B', failure_type (thuộc allowed_failure_types), expect (tool_calls[...] hoặc no_tool=true), và metadata.what_it_tests. File để trống có chủ đích vì mỗi nhóm phải tự thiết kế các case này.",
+  "description": "10 team-authored Company Policy Assistant cases: 5 single-turn and 5 multi-turn.",
   "allowed_failure_types": [
     "wrong_tool",
     "wrong_arg_value",
@@ -10,5 +10,243 @@
     "out_of_scope",
     "missing_info"
   ],
-  "cases": []
+  "cases": [
+    {
+      "id": "CP_S01_ANNUAL_LEAVE",
+      "phase": "B",
+      "query": "Nhân viên có bao nhiêu ngày nghỉ phép năm?",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "policy_area": "leave"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Route an annual-leave question to the internal leave policy."
+      }
+    },
+    {
+      "id": "CP_S02_PASSWORD_RULE",
+      "phase": "B",
+      "query": "Mật khẩu hệ thống công ty phải dài tối thiểu bao nhiêu ký tự và đổi bao lâu một lần?",
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "policy_area": "it_security"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Choose the IT security area for a password requirement question."
+      }
+    },
+    {
+      "id": "CP_S03_COMPARE_EXISTING_EVIDENCE",
+      "phase": "B",
+      "query": "So sánh hai policy section đã có sau đây về trách nhiệm báo cáo: [{\"policy_area\":\"equipment\",\"title\":\"Chính sách thiết bị\",\"section\":\"Xử lý sự cố\",\"facts\":\"Mất thiết bị phải báo IT và quản lý trong 24 giờ.\",\"source\":\"internal-policies/09_Equipment_Policy.md\"},{\"policy_area\":\"code_of_conduct\",\"title\":\"Quy tắc ứng xử\",\"section\":\"Hành vi nơi làm việc\",\"facts\":\"Sự cố quấy rối phải báo HR trong 48 giờ.\",\"source\":\"internal-policies/08_Code_of_Conduct.md\"}]",
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy_compare",
+            "args": {}
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Use the team-authored comparison tool when two evidence sections are already supplied."
+      }
+    },
+    {
+      "id": "CP_S04_CAPABILITY_NO_TOOL",
+      "phase": "B",
+      "query": "Bạn có thể hỗ trợ tôi những loại câu hỏi nào?",
+      "failure_type": "unnecessary_tool",
+      "expect": {
+        "no_tool": true
+      },
+      "metadata": {
+        "what_it_tests": "Answer a capability question directly without retrieving policy."
+      }
+    },
+    {
+      "id": "CP_S05_AMBIGUOUS_POLICY",
+      "phase": "B",
+      "query": "Quy định đó áp dụng với tôi thế nào?",
+      "failure_type": "missing_info",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "clarify",
+            "args": {
+              "response_type": "text"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Ask which policy is meant instead of guessing an ambiguous reference."
+      }
+    },
+    {
+      "id": "CP_M01_REMOTE_WORK_CARRYOVER",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tôi muốn hỏi về làm việc từ xa."
+        },
+        {
+          "role": "user",
+          "content": "Tôi là nhân viên chính thức."
+        },
+        {
+          "role": "user",
+          "content": "Một tuần được remote tối đa mấy ngày và cần báo trước bao lâu?"
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "policy_area": "remote_work"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Carry the remote-work topic into the latest turn and search the correct area."
+      }
+    },
+    {
+      "id": "CP_M02_LEAVE_CORRECTION",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Cho tôi quy định nghỉ ốm."
+        },
+        {
+          "role": "user",
+          "content": "À không, tôi muốn hỏi nghỉ phép năm."
+        },
+        {
+          "role": "user",
+          "content": "Tôi đã làm trên 5 năm, hãy kiểm tra số ngày được hưởng."
+        }
+      ],
+      "failure_type": "wrong_arg_value",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "policy_area": "leave"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "A later correction changes sick leave to annual leave while retaining tenure context."
+      }
+    },
+    {
+      "id": "CP_M03_SWITCH_TO_EQUIPMENT",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Quy định về mật khẩu là gì?"
+        },
+        {
+          "role": "user",
+          "content": "Bỏ câu hỏi mật khẩu."
+        },
+        {
+          "role": "user",
+          "content": "Chuyển sang kiểm tra thời hạn báo mất laptop công ty."
+        }
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy",
+            "args": {
+              "policy_area": "equipment"
+            }
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "The latest source-area switch overrides the earlier IT security request."
+      }
+    },
+    {
+      "id": "CP_M04_CANCEL_LOOKUP",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Tìm chính sách công tác quốc tế."
+        },
+        {
+          "role": "user",
+          "content": "Thôi, hủy yêu cầu đó."
+        },
+        {
+          "role": "user",
+          "content": "Không cần tra cứu nữa, chỉ xác nhận là đã hủy."
+        }
+      ],
+      "failure_type": "unnecessary_tool",
+      "expect": {
+        "no_tool": true
+      },
+      "metadata": {
+        "what_it_tests": "A cancellation in the latest turn prevents an unnecessary policy call."
+      }
+    },
+    {
+      "id": "CP_M05_COMPARE_TWO_POLICIES",
+      "phase": "B",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Evidence P1: Data Privacy, mục Xử lý dữ liệu: Không lưu dữ liệu khách hàng trên thiết bị cá nhân. Nguồn internal-policies/10_Data_Privacy_Policy.md."
+        },
+        {
+          "role": "user",
+          "content": "Evidence P2: IT Security, mục Quản lý thiết bị lưu trữ: Không cắm USB cá nhân vào máy công ty. Nguồn internal-policies/04_IT_Security_Policy.md."
+        },
+        {
+          "role": "user",
+          "content": "Hãy so sánh hai evidence này về sử dụng thiết bị cá nhân."
+        }
+      ],
+      "failure_type": "wrong_tool",
+      "expect": {
+        "tool_calls": [
+          {
+            "name": "policy_compare",
+            "args": {}
+          }
+        ]
+      },
+      "metadata": {
+        "what_it_tests": "Use policy_compare on two policy excerpts carried from earlier turns."
+      }
+    }
+  ]
 }

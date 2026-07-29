@@ -72,6 +72,7 @@ def _normalize_section(raw: Any, index: int) -> tuple[dict[str, Any] | None, lis
         ).strip(),
         "facts": facts,
         "source": str(raw.get("source") or "Unknown source").strip(),
+        "source_path": str(raw.get("source_path") or raw.get("source") or "").strip(),
         "effective_date": (
             str(raw.get("effective_date")).strip()
             if raw.get("effective_date") is not None
@@ -180,6 +181,7 @@ def compare_policy_sections(
         "title": section["title"],
         "section": section["section"],
         "source": section["source"],
+        "source_path": section["source_path"],
         "effective_date": section["effective_date"],
     } for section in normalized]
 

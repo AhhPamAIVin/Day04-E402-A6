@@ -1,4 +1,8 @@
-# Company Policy KB
+# Legacy Company Policy KB
+
+> Thư mục này là dữ liệu mẫu ban đầu của starter và không còn là nguồn chính
+> của đề tài. TechNova Company Policy Assistant hiện đọc dữ liệu từ
+> `starter_v0/internal-policies/`.
 
 This folder contains a small fake internal policy handbook for the lab.
 
