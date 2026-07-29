@@ -97,6 +97,30 @@ tools:
         top_k: {type: integer, default: 3, description: "Số mục"}
       required: [query]
 
+  - name: policy_compare
+    description: "So sánh ít nhất hai policy section đã có từ tool policy hoặc do user cung cấp. Giữ evidence/source, tổng hợp yêu cầu và chỉ đánh dấu xung đột tiềm năng để review thủ công. Tool này không tự tìm policy mới."
+    parameters:
+      type: object
+      properties:
+        policy_sections:
+          type: array
+          minItems: 2
+          description: "Ít nhất hai evidence object. Ưu tiên các field: doc_id, policy_area, title, section, facts, source, effective_date."
+          items:
+            type: object
+            properties:
+              doc_id: {type: string}
+              policy_area: {type: string}
+              title: {type: string}
+              section: {type: string}
+              facts: {type: string}
+              content: {type: string}
+              source: {type: string}
+              effective_date: {type: string}
+            additionalProperties: true
+        comparison_focus: {type: string, default: "", description: "Vấn đề cụ thể cần so sánh."}
+      required: [policy_sections]
+
   - name: papers
     description: "Tìm bài báo khoa học."
     parameters:
