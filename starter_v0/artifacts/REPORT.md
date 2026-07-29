@@ -15,8 +15,8 @@
 | STT | Họ và tên | Mã sinh viên | Vai trò | Phần phụ trách chính | Evidence/file |
 |---:|---|---|---|---|---|
 | 1 | Phạm Tuấn Anh | 2A202601072 | Tool Engineer | Hoàn thiện `policy`, xây `policy_compare`, registry và smoke test | `tools/policy/`, `tools/policy_compare/` |
-| 2 | Ngô Mạnh Minh Huy | 2A202601926 | Prompt Engineer | Routing, citation, clarification, guardrail và multi-turn | `artifacts/system_prompt.md`, `artifacts/tools.yaml` |
-| 3 | Tống Duy An | 2A202601995 | Evaluation Engineer | 10 group cases, chạy v0–v3, phân tích failure và metric | `data/eval_group.json`, `runs/`, `version_log.csv` |
+| 2 | Tống Duy An | 2A202601995 | Prompt Engineer | Routing, citation, clarification, guardrail và multi-turn | `artifacts/system_prompt.md`, `artifacts/tools.yaml` |
+| 3 | Ngô Mạnh Minh Huy | 2A202601926 | Evaluation Engineer | 10 group cases, chạy v0–v3, phân tích failure và metric | `data/eval_group.json`, `runs/`, `version_log.csv` |
 | 4 | Đào Bình Minh | 2A202601364 | Mock Data Engineer | Xây, kiểm tra và mô tả 10 tài liệu policy TechNova | `internal-policies/` |
 | 5 | Ngô Trọng Bảo | 2A202601024 | UI & Report Engineer | Streamlit UI, tool trace, transcript, demo và tổng hợp báo cáo | `app.py`, `transcripts/`, `REPORT.md` |
 
